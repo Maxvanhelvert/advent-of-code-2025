@@ -18,16 +18,16 @@ total = 0
 
 def check_num(dig) 
   # true if num[0...mid] == num[mid..last] 
-  n = dig.length
-  num = dig.join
-  half = n/2
-  range = (1..half)
+  n = dig.length #4
+  num = dig.join #1212
+  half = n/2 #2
+  range = (1..half) #range = 1,2
 
-  range.each do |size|
-    next unless n % size == 0
+  range.each do |size| # size = 2
+    next unless n % size == 0 # 4 / 2 = 0
 
-    pattern = num[0, size]
-    return true if pattern * (n/size) == num
+    pattern = num[0, size] # patter = 12
+    return true if pattern * (n/size) == num # [12] x 2 (1212) == 1212
   end
   # next, to check all possible combinations of duplicates (so the same number repeated, same set of numbers repeated.)
   # Now, an ID is invalid if it is made only of some sequence of digits repeated at least twice. 
