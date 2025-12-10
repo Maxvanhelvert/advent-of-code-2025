@@ -7,6 +7,7 @@ def get_input
 end
 
 def start
+	# test_arr = ["2423222124331122221227222322344212412325322242223332512214322321331242344222241222126153122242224323"]
   input_arr = get_input
   total = 0
   
@@ -14,26 +15,27 @@ def start
     batteries = input.split('')
     
     length = batteries.length
-	number_of_digits = 12
-	current_digit = 0
-
-
-	while current_digit < number_of_digits 
-	    num_index = 0
+		number_of_digits = 12
+		current_digit = 0
+		num_index = 0
 		index = 0
-		num = '0'
 		total_num = '0'
-		
-		while index < length - (number_of_digits - current_digit)
-		  if batteries[index] > num
-			num = batteries[index] 
-			num_index = index
-		  end
-		  index += 1
+
+		while current_digit < number_of_digits 
+			p index = num_index
+			offset = number_of_digits - current_digit - 1
+			num = '0'
+			
+			while index < length - offset
+				if num < batteries[index]
+					num = batteries[index] 
+					num_index = index + 1
+				end
+				index += 1
+			end
+			total_num += num
+			current_digit += 1
 		end
-		total_num = total_num + num
-		current_digit += 1
-	end
 
     final_num = (total_num).to_i
     total += final_num
@@ -43,4 +45,4 @@ end
 
 start 
 #previous answer too low. 164722808889389
-#current answer 1593 - not sure where the mistake is, it should be at least 12 digits long
+#answer still too low. 172205503003755
