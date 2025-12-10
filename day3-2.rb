@@ -9,28 +9,30 @@ end
 def start
   input_arr = get_input
   total = 0
+  
   input_arr.each do |input|
     batteries = input.split('')
     
     length = batteries.length
 	number_of_digits = 12
 	current_digit = 0
-    num_index = 0
-    start = 0
-    num = '0'
-    total_num = '0'
+
 
 	while current_digit < number_of_digits 
-		while start < length - (number_of_digits - current_digit)
-		  if batteries[start] > num
-			num = batteries[start] 
-			num_index = start
+	    num_index = 0
+		index = 0
+		num = '0'
+		total_num = '0'
+		
+		while index < length - (number_of_digits - current_digit)
+		  if batteries[index] > num
+			num = batteries[index] 
+			num_index = index
 		  end
-		  start += 1
+		  index += 1
 		end
 		total_num = total_num + num
 		current_digit += 1
-		num = '0'
 	end
 
     final_num = (total_num).to_i
@@ -39,4 +41,6 @@ def start
   puts total
 end
 
-start #current answer too low ... ?
+start 
+#previous answer too low. 164722808889389
+#current answer 1593 - not sure where the mistake is, it should be at least 12 digits long
