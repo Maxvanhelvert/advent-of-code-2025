@@ -32,3 +32,5 @@ def start
 end
 
 p start
+# first answer 6528(or so) and 7829
+# second answer 1284
