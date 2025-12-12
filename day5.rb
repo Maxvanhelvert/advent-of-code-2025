@@ -30,13 +30,13 @@ def start
     fresh_range = fresh_id.split('-')
     first = fresh_range[0]
     last = fresh_range[1]
-
     ids.each do |id|
       if id >= first && id <= last
         ids.delete(id)
         fresh_items += 1
       end
     end
+    p ids.length
   end
   fresh_items
 end
