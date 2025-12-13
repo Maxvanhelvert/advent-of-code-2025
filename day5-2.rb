@@ -9,23 +9,29 @@ def get_fresh
   end
   fresh_range = []
   fresh_arr.each {|range| fresh_range << range.split('-')}
-  fresh_range
+  final = []
+  fresh_range.each do |range|
+    first = range[0].to_i
+    last = range[1].to_i
+    final << [first, last]
+  end
+  final.sort
 end
 
 def start
-  p fresh_range = get_fresh
-  all_ids = []
+  fresh_range = get_fresh
 
-  fresh_range.each do |range|
-    first = range[0].to_i 
-    last = range[1].to_i
-    
-    (first..last).each do |current|
-      next if all_ids.include?(current)
-      all_ids << current
+  final_range = []
+  
+  fresh_range.each do |first, last|
+    if final_range.empty? || first > final_range[-1][1]
+      final_range << [first, last]
+    else
+      final_range[-1][1] = [final_range[-1][1], last].max
     end
   end
-  all_ids
+
+  final_range.sum {|a, b| b - a + 1}
 end
 
 p start
