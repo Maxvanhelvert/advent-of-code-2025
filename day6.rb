@@ -17,9 +17,9 @@ def start
 
   operators.each_with_index do |operator, i|
     if operator == '+'
-      p result = (first[i] + second[i] + third[i] + fourth[i])
+      result = (first[i] + second[i] + third[i] + fourth[i])
     else
-      p result = (first[i] * second[i] * third[i] * fourth[i])
+      result = (first[i] * second[i] * third[i] * fourth[i])
     end
     total += result
   end
