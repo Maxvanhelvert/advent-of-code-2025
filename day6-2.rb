@@ -7,10 +7,7 @@ def get_input
 end
 
 def find_longest(first, second, third, fourth)
-  longest = [first, second, third, fourth].max
-  arr = longest.split('')
-  length = arr.length
-  length
+  [first.length, second.length, third.length, fourth.length].max
 end
 
 def start
@@ -23,11 +20,35 @@ def start
   operators = maths_homework[4]
 
   operators.each_with_index do |operator, i|
-    length = find_longest(first[i], second[i], third[i], fourth[i])
-    # for each number(string), take the first digit (convert to int).
-    # merge first[0], second[0], third[0], fourth[0] ... until i > lenght (as long as each number has digits)
-    # take those (up to four) numbers and add or multiply them according to operator.
+    longest_length = find_longest(first[i], second[i], third[i], fourth[i])
+    count = 0
+    sum = 0
+    first_row = first[i].chars
+    second_row = second[i].chars
+    third_row = third[i].chars
+    fourth_row = fourth[i].chars
+
+    while count < longest_length
+      new_num = ''
+      new_num << first_row[count] unless first_row[count] == nil
+      new_num << second_row[count] unless second_row[count] == nil
+      new_num << third_row[count] unless third_row[count] == nil
+      new_num << fourth_row[count] unless fourth_row[count] == nil
+      num = new_num.to_i
+
+      if operator == '+'
+        sum += num unless num == 0
+      else 
+        sum *= num unless num == 0
+      end
+      count += 1
+    end
+
+    p total += sum
+    sum = 0
   end
+  total
 end
 
-start
+p start
+# 5204412 too low
