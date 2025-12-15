@@ -8,7 +8,7 @@ end
 
 def start
   tachyon = get_input
-  possibilities = 0
+  splits = 0
   tachyon.each_with_index do |line, i|
     line.each_with_index do |pos, j|
       if pos == 'S'
@@ -16,14 +16,15 @@ def start
       elsif pos == '^' && tachyon[i-1][j] == '|'
         tachyon[i][j-1] = '|'
         tachyon[i][j+1] = '|'
+        splits += 1
       elsif pos == '.' && tachyon[i-1][j] == '|'
         tachyon[i][j] = '|'
       else 
       next
       end
-    possibilities += 1
     end
   end
+  splits
 end
 
-start
+p start
