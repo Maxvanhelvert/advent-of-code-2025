@@ -32,6 +32,18 @@ end
 def start
   boxes = get_input
   connections = generate_connections(boxes)
+	circuits = []
+	
+	(0...1000).each do |i|
+		first_box = connections[i][1]
+		second_box = connections[i][2]
+		
+		circuits.each_with_index do |circuit, j|
+			if circuit.include?(first_box) || circuit.include?(second_box)
+				
+			end
+		end
+	end
   # next step, connecting boxes into circuits. 
   # for each 0...1000 if add the boxes to a current circuit if one of them is already in a circuit
   # else add them to the next new circuit
