@@ -37,17 +37,28 @@ def start
 	(0...1000).each do |i|
 		first_box = connections[i][1]
 		second_box = connections[i][2]
-		
+		circuits << [first_box, second_box] if circuits.empty?
+
 		circuits.each_with_index do |circuit, j|
-			if circuit.include?(first_box) || circuit.include?(second_box)
-				
-			end
+      if circuit.include?(first_box)
+        circuit << second_box
+        break
+      elsif circuit.include?(second_box)
+			  circuit << first_box
+        break
+      elsif j == circuits.length - 1
+        circuits << [first_box, second_box]
+		  end
 		end
 	end
-  # next step, connecting boxes into circuits. 
-  # for each 0...1000 if add the boxes to a current circuit if one of them is already in a circuit
-  # else add them to the next new circuit
-  # get the size of the three largest circuits and multiply them
+
+  circuits.sort_by!(&:length)
+  circuits.reverse!
+
+  result = circuits[0].length * circuits[1].length * circuits[2].length
+  p result
 end
 
 start
+
+# result 6840 too low
