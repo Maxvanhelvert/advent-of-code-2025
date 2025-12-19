@@ -29,36 +29,49 @@ def generate_connections(boxes)
   connections.sort_by!(&:first)
 end
 
+def find(parent, x)
+  return x if parent[x] == x
+  find(parent, parent[x])
+end
+
+def union(parent, a, b)
+  ra = find(parent, a)
+  rb = find(parent, b)
+  return false if ra == rb
+
+  parent[ra] = rb
+  true
+end
+
 def start
   boxes = get_input
   connections = generate_connections(boxes)
-	circuits = []
 	
-	(0...1000).each do |i|
-		first_box = connections[i][1]
-		second_box = connections[i][2]
-		circuits << [first_box, second_box] if circuits.empty?
+  parent = Array.new(boxes.length) { |i| i}
 
-		circuits.each_with_index do |circuit, j|
-      if circuit.include?(first_box)
-        circuit << second_box
-        break
-      elsif circuit.include?(second_box)
-			  circuit << first_box
-        break
-      elsif j == circuits.length - 1
-        circuits << [first_box, second_box]
-		  end
-		end
-	end
+  connect = 0
 
-  circuits.sort_by!(&:length)
-  circuits.reverse!
+  connections.each do |_, a, b|
+    break if connect == 1000
+      
+    union(parent, a, b)
+    connect += 1
 
-  result = circuits[0].length * circuits[1].length * circuits[2].length
+  end
+
+  circuits = Hash.new(0)
+
+  parent.each_index do |i|
+    root = find(parent, i)
+    circuits[root] += 1
+  end
+
+  sizes = circuits.values.sort.reverse
+  result = sizes[0] * sizes[1] * sizes[2]
   p result
 end
 
 start
 
 # result 6840 too low
+# correct 32103
