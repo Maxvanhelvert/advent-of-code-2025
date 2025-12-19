@@ -49,13 +49,15 @@ def start
 	
   parent = Array.new(boxes.length) { |i| i}
 
-  connect = 0
+  first_last = 0
+  second_last = 0
 
   connections.each do |_, a, b|
-    break if connect == 1000
       
-    union(parent, a, b)
-    connect += 1
+    if union(parent, a, b)
+      first_last = boxes[a][0]
+      second_last = boxes[b][0]
+    end
 
   end
 
@@ -66,12 +68,10 @@ def start
     circuits[root] += 1
   end
 
-  sizes = circuits.values.sort.reverse
-  result = sizes[0] * sizes[1] * sizes[2]
+  result = first_last * second_last
   p result
 end
 
 start
 
-# result 6840 too low
-# correct 32103
+# result 8133642976
