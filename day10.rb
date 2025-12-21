@@ -36,11 +36,30 @@ def get_input(request)
 end
 
 def start
-  lights = get_input('lights')
-  buttons = get_input('buttons')
+  all_lights = get_input('lights')
+  all_buttons = get_input('buttons')
+  total_length = 0
 
-  p lights
-  p buttons
+  all_lights.each_with_index do |solution, i|
+    start_lights = Array.new(solution.length) { |l| l = '.'}
+
+    length = 0
+    possible_combinations = []
+    buttons = all_buttons[i]
+    
+    (1...buttons.length).each do |n|
+      possible_combinations << buttons.permutation(n)
+    end
+
+    possible_combinations.each do |combination|
+      start_lights = get_lights
+      break if start_lights == solution
+
+      length = combination.length
+    end
+
+    total_length += length
+  end
 end
 
 start
