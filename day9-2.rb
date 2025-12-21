@@ -35,10 +35,6 @@ def start
     q = tiles[(i + 1) % tiles.length]
     edges << [p, q]
   end
-  
-  ys = tiles.map { |_, y| y }
-  min_y = ys.min
-  max_y = ys.max
 
   row_intersections = Hash.new { |h, k| h[k] = [] }
 
