@@ -48,11 +48,12 @@ def start
     buttons = all_buttons[i]
     
     (1...buttons.length).each do |n|
-      possible_combinations << buttons.permutation(n)
+      possible_combinations << buttons.permutation(n).to_a # not returning expected
     end
+    p possible_combinations
 
     possible_combinations.each do |combination|
-      start_lights = get_lights
+      start_lights = [] #get_lights
       break if start_lights == solution
 
       length = combination.length
