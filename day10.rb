@@ -59,19 +59,26 @@ def start
 
     length = 0
     buttons = all_buttons[i]
+    found = false
     
     n = 1
-    while n < buttons.length
-      buttons.permutation(n).each do |perm|
+    while n < buttons.length && !found
+      buttons.combination(n).each do |perm|
         final_lights = get_lights(perm, solution.length)
         length = perm.length
-        break if final_lights == solution
+        if final_lights == solution
+          total_length += length
+          found = true 
+          break
+        end
       end
       n += 1
     end 
-    p total_length += length
     n = 1
   end
+  total_length
 end
 
-start
+p start
+
+# 1108 too high
